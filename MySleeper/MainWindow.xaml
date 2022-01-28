@@ -7,7 +7,20 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200" WindowState="Maximized" WindowStyle="None" AllowsTransparency="True">
-
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="FontSize" Value="72"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            
+        </Style>
+    </Window.Resources>
     <Grid Margin="0,0,0,0">
         <Grid.Background>
             <ImageBrush x:Name="BackGr" />
@@ -15,26 +28,28 @@
         <tb:TaskbarIcon IconSource="/MySleeper.ico" TrayLeftMouseDown="TaskIcon_TrayLeftMouseDown">
             <tb:TaskbarIcon.TrayToolTip>
                 <Border Background="White" BorderBrush="Orange" BorderThickness="2" CornerRadius="4" Opacity="0.8" Width="360" Height="40">
-                    <TextBlock x:Name="TaskBarText" Text="hello world" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TaskBarText" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Border>
             </tb:TaskbarIcon.TrayToolTip>
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu Background="Orange">
-                    <MenuItem Header="Настройки" Click="ButtonShowSetting_Click"/>
-                    <MenuItem Header="Закрыть" Click="TaskIcon_TrayLeftClose"/>
+                    <MenuItem Header="Настройки"    Click="ButtonShowSetting_Click"/>
+                    <MenuItem Header="Закрыть"      Click="TaskIcon_TrayLeftClose"/>
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-        <Label x:Name="labletextSleeper" Content="textSleeper" HorizontalAlignment="Left" Margin="35,42,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="72"/>
-        <Label x:Name="lable1" Content="Время перерыва:" HorizontalAlignment="Left" Margin="35,200,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="120" FontWeight="Bold"/>
-        <Label x:Name="lableBreakTime" Content="1000" HorizontalAlignment="Left" Margin="35,350,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="100" FontWeight="Normal"/>
-        <Label x:Name="lable2" Content="Таймер до перерыва" HorizontalAlignment="Left" Margin="35,600,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="72" FontWeight="Normal"/>
-        <Label x:Name="lableBreakTimer" Content="01.60" HorizontalAlignment="Left" Margin="700,600,0,0" VerticalAlignment="Top" FontFamily="Calibri" FontSize="72" FontWeight="Normal"/>
-        <Button x:Name="ButtonShowSetting" Margin="0,30,30,30" Background="Transparent" VerticalAlignment="Top" Height="30" Width="30" HorizontalAlignment="Right" Click="ButtonShowSetting_Click">
+        
+        <Label x:Name="labletextSleeper"    Content="textSleeper"           Margin="35,42,0,0"                                          />
+        <Label x:Name="lable1"              Content="Время перерыва:"       Margin="35,200,0,0"     FontWeight="Bold"   FontSize="120"  />
+        <Label x:Name="lableBreakTime"      Content="1000"                  Margin="35,350,0,0"     FontWeight="Normal" FontSize="100"  />
+        <Label x:Name="lable2"              Content="Таймер до перерыва"    Margin="35,600,0,0"     FontWeight="Normal"                 />
+        <Label x:Name="lableBreakTimer"     Content="01.60"                 Margin="700,600,0,0"    FontWeight="Normal"                 />
+        
+        <Button x:Name="ButtonShowSetting" Margin="0,30,30,30" Height="30" Width="30" Click="ButtonShowSetting_Click">
             <Image Source="/img.png" />
         </Button>
-        <Button x:Name="ButtonHideMainWindow" Background="Transparent" Content="Свернуть" Margin="0,30,80,30" VerticalAlignment="Top" Height="30" Width="70" HorizontalAlignment="Right" Click="ButtonHideMainWindow_Click"/>
-        <Button x:Name="ButtonShowTraningWindow" Background="Transparent" Content="Тренировки" Margin="0,30,170,30" VerticalAlignment="Top" Height="30" Width="90" HorizontalAlignment="Right" Click="ButtonShowTraningWindow_Click"/>
+        <Button x:Name="ButtonHideMainWindow"       Content="Свернуть"      Margin="0,30,80,30"     Height="30" Width="70" Click="ButtonHideMainWindow_Click"       />
+        <Button x:Name="ButtonShowTraningWindow"    Content="Тренировки"    Margin="0,30,170,30"    Height="30" Width="90" Click="ButtonShowTraningWindow_Click"    />
 
 
     </Grid>

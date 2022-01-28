@@ -4,30 +4,20 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace MySleeper
 {
-    /// <summary>
-    /// Логика взаимодействия для TraningWindow.xaml
-    /// </summary>
+
     public partial class TraningWindow : Window
     {
         private List<TypeTrening> tt = new();
         private List<SettingsTrenings> st = new();
         private ObservableCollection<DataGridAddTraning> obsAddTraning = new();
-        //private List<DataGridAddTraning> ss = new();
         public TraningWindow()
         {
             InitializeComponent();
@@ -94,13 +84,6 @@ namespace MySleeper
             {
                 e.Handled = true;
             }
-        }
-
-
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-
-            Close();
         }
 
         public void CurrentTime()

@@ -1,23 +1,16 @@
-﻿//using System.Data.Entity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using MySleeper.Models;
 
 namespace MySleeper
 {
-    
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         internal static SettingsTimers settingsTimers = new();

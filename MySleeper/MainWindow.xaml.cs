@@ -16,8 +16,6 @@ namespace MySleeper
         internal static SettingsTimers settingsTimers = new();
         internal static SettingsVisuals settingsVisuals = new();
         internal static List<BackGroundImages> backGroundImages = new();
-        internal static int BreakTime;
-        internal static int BreakTimer;
         internal static MainWindow Instance { get; private set; }
 
         
@@ -32,14 +30,14 @@ namespace MySleeper
             
             SetValuesMainWindow(settingsTimers, settingsVisuals, backGroundImages);
             this.Hide();
-            Timers.timerBreakTimer(true);
+            Timers.TimerBreak();
         }
 
         
 
         internal static void SetValuesMainWindow(SettingsTimers st, SettingsVisuals sv, List<BackGroundImages> bg)
         {
-            var color = (Color)ColorConverter.ConvertFromString(sv.SV_BACKCOLOR);
+            Color color = (Color)ColorConverter.ConvertFromString(sv.SV_BACKCOLOR);
             Instance.Background = new SolidColorBrush(color);
             color = (Color)ColorConverter.ConvertFromString(sv.SV_FONTCOLOR);
 
@@ -62,13 +60,14 @@ namespace MySleeper
             Instance.lable2.Foreground = new SolidColorBrush(color);
             Instance.labletextSleeper.Content = st.ST_TEXT;
 
+            /*BreakTime = 0;
             BreakTime = Convert.ToInt32(st.ST_TIME) * 60;
             TimeSpan tstime = TimeSpan.FromSeconds(BreakTime);
             Instance.lableBreakTime.Content = $"{tstime.Hours} часов {tstime.Minutes} минут {tstime.Seconds} секунд";
-
+            BreakTimer = 0;
             BreakTimer = Convert.ToInt32(st.ST_TIMER) * 60;
             tstime = TimeSpan.FromSeconds(BreakTimer);
-            Instance.lableBreakTimer.Content = $"{tstime.Hours} часов {tstime.Minutes} минут {tstime.Seconds} секунд";
+            Instance.lableBreakTimer.Content = $"{tstime.Hours} часов {tstime.Minutes} минут {tstime.Seconds} секунд";*/
         }
 
         internal static void SetBackImagesWindow()
@@ -88,8 +87,9 @@ namespace MySleeper
 
         private void ButtonShowSetting_Click(object sender, RoutedEventArgs e)
         {
+            
             Show();
-            SettingWindow f = new SettingWindow(); 
+            SettingWindow f = new SettingWindow();
             f.Owner = this;
             
             f.Closed += (object s,EventArgs args) =>
@@ -120,7 +120,9 @@ namespace MySleeper
         }
         private void ButtonShowTraningWindow_Click(object sender, RoutedEventArgs e)
         {
+            
             TraningWindow tr = new();
+            tr.Topmost = true;
             tr.ShowDialog();
         }
 

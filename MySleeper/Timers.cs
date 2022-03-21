@@ -5,72 +5,56 @@ namespace MySleeper
 {
     public class Timers : MainWindow
     {
-        private static readonly DispatcherTimer timerTimer = new();
-        private static readonly DispatcherTimer timerTime = new();
-        private static readonly DispatcherTimer TimerRotate = new();
+        //private static DispatcherTimer TimerRotate = new();
+        private static DispatcherTimer TimerSleeper = new();
+        private static bool t = true;
+        internal static int BreakTimer;
 
-        internal static void timerBreakTimer(bool status)
+        internal static void TimerBreak()
         {
-            if (status)
-            {
-                timerTimer.Tick += new EventHandler(timerBreakTimerTick);
-                timerTimer.Interval = new TimeSpan(0, 0, 1);
-                timerTimer.Start();
-            }
-            else timerTimer.Stop();
+            TimerSleeper.IsEnabled = true;
+            TimerSleeper.Interval = new TimeSpan(0, 0, 1);
+            TimerSleeper.Tick += timerBreakTimerTick;
+            TimerSleeper.Start();
         }
+
         internal static void timerBreakTimerTick(object sender, EventArgs e)
         {
             BreakTimer--;
-            if (BreakTimer <= 0)
+            
+            if (BreakTimer <= 0 && !t)
             {
-                SetValuesMainWindow(settingsTimers, settingsVisuals, backGroundImages);
-                timerBreakTimer(false);
-                timerBreakTime(true);
-                MainWindow.Instance.Show();
-                MainWindow.Instance.Topmost = true;
+                BreakTimer = (int)settingsTimers.ST_TIME * 60;
+                t = true;
+                TimeSpan tstime = TimeSpan.FromSeconds((int)settingsTimers.ST_TIMER * 60);
+                Instance.lableBreakTimer.Content = $"{tstime.Hours} часов {tstime.Minutes} минут {tstime.Seconds} секунд";
+                Instance.Show();
+                Instance.Topmost = true;
             }
-            else
+            if (BreakTimer <= 0 && t)
             {
-                TimeSpan ts = TimeSpan.FromSeconds(BreakTimer);
-                MainWindow.Instance.lableBreakTimer.Content = $"{ts.Hours} часов {ts.Minutes} минут {ts.Seconds} секунд";
-                MainWindow.Instance.TaskBarText.Text = $"До перерыва {ts.Hours} часов {ts.Minutes} минут {ts.Seconds} секунд";
+                BreakTimer = (int)settingsTimers.ST_TIMER * 60;
+                t = false;
+                TimeSpan tstime = TimeSpan.FromSeconds((int)settingsTimers.ST_TIME * 60);
+                Instance.lableBreakTime.Content = $"{tstime.Hours} часов {tstime.Minutes} минут {tstime.Seconds} секунд";
+                Instance.Hide();
             }
-        }
+            TimeSpan ts = TimeSpan.FromSeconds(BreakTimer);
 
-        internal static void timerBreakTime(bool status)
-        {
-            if (status)
+            if (BreakTimer > 0 && !t)
             {
-                timerTime.Tick += new EventHandler(timeBreakTimeTick);
-                timerTime.Interval = new TimeSpan(0, 0, 1);
-                timerTime.Start();
+                Instance.TaskBarText.Text = $"До перерыва {ts.Hours} часов {ts.Minutes} минут {ts.Seconds} секунд";
+                Instance.lableBreakTimer.Content = $"{ts.Hours} часов {ts.Minutes} минут {ts.Seconds} секунд"; 
             }
-            else
+            if (BreakTimer > 0 && t)
             {
-                timerTime.Stop();
-            }
-        }
-
-        internal static void timeBreakTimeTick(object sender, EventArgs e)
-        {
-            BreakTime--;
-            if (BreakTime <= 0)
-            {
-                SetValuesMainWindow(settingsTimers, settingsVisuals, backGroundImages);
-                timerBreakTime(false);
-                timerBreakTimer(true);
-                MainWindow.Instance.Hide();
-            }
-            else
-            {
-                TimeSpan ts = TimeSpan.FromSeconds(BreakTime);
-                MainWindow.Instance.lableBreakTime.Content = string.Format("{0} часов {1} минут {2} секунд", ts.Hours, ts.Minutes, ts.Seconds);
+                Instance.lableBreakTime.Content = string.Format("{0} часов {1} минут {2} секунд", ts.Hours, ts.Minutes, ts.Seconds);
             }
         }
 
         internal static void RotateTimer(long a)
         {
+            DispatcherTimer TimerRotate = new();
             TimerRotate.Tick += new EventHandler(rotateBreakTimeTick);
             TimerRotate.Interval = new TimeSpan(0, 0, Convert.ToInt32(a));
             TimerRotate.Start();
@@ -78,10 +62,6 @@ namespace MySleeper
         internal static void rotateBreakTimeTick(object sender, EventArgs e)
         {
             SetBackImagesWindow();
-            //Instance.Background.
         }
-
-        
     }
-
 }
